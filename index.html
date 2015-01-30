@@ -9,7 +9,9 @@
     <h1> Twittler </h1>
 
     <div id="addtweet">
-
+      <textarea rows="4" cols="50" id="tweetform"></textarea>
+      <br>
+      <input type="submit" id="tweetsubmit" value="Tweet It!">
     </div>
 
     <ul id="tweetfeed">
@@ -23,6 +25,7 @@
         //$body.html('');  //keep this here in case I need to check functionality
 
         var index = streams.home.length - 1;
+
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div class="tweet"></div>');
@@ -33,6 +36,10 @@
           $tweet.appendTo($feed);
           index -= 1;
         }
+
+        $('.user').on('click', function() {
+          $(this).css({'color': 'black'});
+        });
 
       });
 

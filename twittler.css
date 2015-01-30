@@ -10,6 +10,35 @@ body {
   margin: 0 auto;
 }
 
+#addtweet {
+  margin: 5px auto;
+  background: grey;
+  padding: 20px;
+  border-radius: 20px;
+  width: 500px;
+}
+
+#tweetform {
+  position: relative;
+  height: 100px;
+  width: 490px;
+}
+
+#tweetsubmit {
+    color:  white;
+    background: red;
+    padding:  10px;
+    border:  1px solid white;
+    width: 490px;
+    position: relative;
+    left: 2px;
+}
+
+#tweetsubmit:focus {
+    outline: none;
+    border:  1px solid blue;
+}
+
 .tweet {
   margin: 10px auto;
   color: black;
