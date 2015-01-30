@@ -4,23 +4,23 @@
  */
 
 // set up data structures
-window.streams = {};
-streams.home = [];
+window.streams = {}; //all data
+streams.home = []; //all tweets of all users
 streams.users = {};
-streams.users.shawndrost = [];
+streams.users.shawndrost = []; //tweets for user shawndrost
 streams.users.sharksforcheap = [];
 streams.users.mracus = [];
 streams.users.douglascalhoun = [];
-window.users = Object.keys(streams.users);
+window.users = Object.keys(streams.users); //collection of users (and their tweets)
 
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
-  var username = newTweet.user;
-  streams.users[username].push(newTweet);
-  streams.home.push(newTweet);
+  var username = newTweet.user; //get user data from the tweet
+  streams.users[username].push(newTweet); //add tweet to the user's tweets
+  streams.home.push(newTweet); //add tweet to all tweets
 };
 
-// utility function
+// utility function to return a random element from an array 
 var randomElement = function(array){
   var randomIndex = Math.floor(Math.random() * array.length);
   return array[randomIndex];
@@ -33,6 +33,8 @@ var objects = ['my', 'your', 'the', 'a', 'my', 'an entire', 'this', 'that', 'the
 var nouns = ['cat', 'koolaid', 'system', 'city', 'worm', 'cloud', 'potato', 'money', 'way of life', 'belief system', 'security system', 'bad decision', 'future', 'life', 'pony', 'mind'];
 var tags = ['#techlife', '#burningman', '#sf', 'but only i know how', 'for real', '#sxsw', '#ballin', '#omg', '#yolo', '#magic', '', '', '', ''];
 
+
+//function to create a random tweet message
 var randomMessage = function(){
   return [randomElement(opening), randomElement(verbs), randomElement(objects), randomElement(nouns), randomElement(tags)].join(' ');
 };
@@ -42,14 +44,17 @@ var generateRandomTweet = function(){
   var tweet = {};
   tweet.user = randomElement(users);
   tweet.message = randomMessage();
-  tweet.created_at = new Date();
+  tweet.created_at = new Date(); //timestamp!!
   addTweet(tweet);
 };
 
+
+//creates the initial ten tweets
 for(var i = 0; i < 10; i++){
   generateRandomTweet();
 }
 
+//this creates a constant stream of tweets
 var scheduleNextTweet = function(){
   generateRandomTweet();
   setTimeout(scheduleNextTweet, Math.random() * 1500);
