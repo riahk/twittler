@@ -1,3 +1,37 @@
 body {
   font-family: 'Arial', sans-serif;
 }
+
+#tweetfeed {
+  width: 500px;
+  background: grey;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 0 auto;
+}
+
+.tweet {
+  margin: 10px auto;
+  color: black;
+  background: white;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.user {
+    color: red;
+    margin: 0;
+}
+
+.message {
+  color: blue;
+  margin:  0;
+  position:  relative;
+  margin-left: 20px;
+}
+
+.timestamp {
+  color: grey;
+  font-size: 10px;
+  margin: 5px;
+}
