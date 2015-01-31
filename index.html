@@ -9,7 +9,8 @@
     <h1> Twittler </h1>
 
     <div id="addtweet">
-      <textarea rows="4" cols="50" id="tweetform"></textarea>
+      <textarea rows="4" cols="50" id="tweetform" 
+        placeholder="Got something to say?"></textarea>
       <br>
       <input type="submit" id="tweetsubmit" value="Tweet It!">
     </div>
@@ -24,21 +25,61 @@
         var $feed = $('#tweetfeed');
         //$body.html('');  //keep this here in case I need to check functionality
 
+        var newTweet = function(newTweet) {
+          var tweet = newTweet;
+          var $tweet = $('<div class="tweet"></div>');
+
+          //add meta-data
+          $tweet.data("user", tweet.user);
+
+          //add the tweet to the doc
+          $tweet.append('<h3 class="user">@' + tweet.user + ': </h3><br>'); 
+          $tweet.append('<p class="message">' +  tweet.message + '</p><br>');
+          $tweet.append('<p class="timestamp">Tweeted On: ' + tweet.created_at + '</h4>');
+          $tweet.prependTo($feed);
+        };
+
         var index = streams.home.length - 1;
 
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div class="tweet"></div>');
-
-          $tweet.append('<h3 class="user">@' + tweet.user + ': </h3><br>'); 
-          $tweet.append('<p class="message">' +  tweet.message + '</p><br>');
-          $tweet.append('<p class="timestamp">Tweeted On: ' + tweet.created_at + '</h4>');
-          $tweet.appendTo($feed);
+          
+          newTweet(tweet);
           index -= 1;
         }
 
+        //show a user's tweets when username is clicked
         $('.user').on('click', function() {
           $(this).css({'color': 'black'});
+          var user = $(this).closest(".tweet").data("user");
+          //alert(user);
+
+          //show all the tweets by this user:
+          //$feed.html('');
+
+          var userIndex = streams.users[user].length;
+          alert(userIndex);
+
+          /*while(index >= 0) {
+            var tweet = streams.users[user][userIndex];
+
+            newTweet(tweet);
+            index -= 1;
+          }*/
+        });
+
+        //create a visitor tweet
+        $('#tweetsubmit').on('click', function() {
+          var text = $('#tweetform').val();
+          //alert(text);
+          //writeTweet(text); //currently getting an error when this is called
+          var tweet = {};
+          tweet.user = "visitor";
+          tweet.message = text;
+          tweet.created_at = new Date();
+
+          newTweet(tweet);
+          $('#tweetform').val(''); //clear form after submission
         });
 
       });
