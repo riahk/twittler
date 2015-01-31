@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="twittler.css">
   </head>
   <body>
-    <h1> Twittler </h1>
+    <h1 id="home"> Twittler </h1>
 
     <div id="addtweet">
       <textarea rows="4" cols="50" id="tweetform" 
@@ -25,7 +25,7 @@
         var $feed = $('#tweetfeed');
         //$body.html('');  //keep this here in case I need to check functionality
 
-        var newTweet = function(newTweet) {
+        var newTweet = function(newTweet, prepend) {
           var tweet = newTweet;
           var $tweet = $('<div class="tweet"></div>');
 
@@ -36,7 +36,10 @@
           $tweet.append('<h3 class="user">@' + tweet.user + ': </h3><br>'); 
           $tweet.append('<p class="message">' +  tweet.message + '</p><br>');
           $tweet.append('<p class="timestamp">Tweeted On: ' + tweet.created_at + '</h4>');
-          $tweet.prependTo($feed);
+          
+          if(prepend) {
+            $tweet.prependTo($feed);
+          } else { $tweet.appendTo($feed); }
         };
 
         var index = streams.home.length - 1;
@@ -52,20 +55,34 @@
         $('.user').on('click', function() {
           $(this).css({'color': 'black'});
           var user = $(this).closest(".tweet").data("user");
-          //alert(user);
 
           //show all the tweets by this user:
-          //$feed.html('');
+          $feed.html('');
 
-          var userIndex = streams.users[user].length;
-          alert(userIndex);
+          var index = streams.home.length - 1; //the number of total tweets
 
-          /*while(index >= 0) {
-            var tweet = streams.users[user][userIndex];
+          while(index >= 0) {
+            var tweet = streams.home[index];
+
+            if(tweet.user == user) {
+              newTweet(tweet);
+            }
+
+            index -= 1;
+          }
+        });
+
+        //refresh the tweets when the home button is clicked
+        $('#home').on('click', function() {
+          $feed.html('');
+          var index = streams.home.length - 1;
+
+          while(index >= 0 ) {
+            var tweet = streams.home[index];
 
             newTweet(tweet);
             index -= 1;
-          }*/
+          }
         });
 
         //create a visitor tweet
@@ -78,7 +95,7 @@
           tweet.message = text;
           tweet.created_at = new Date();
 
-          newTweet(tweet);
+          newTweet(tweet, true);
           $('#tweetform').val(''); //clear form after submission
         });
 
