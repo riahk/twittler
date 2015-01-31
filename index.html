@@ -52,7 +52,7 @@
         }
 
         //show a user's tweets when username is clicked
-        $('.user').on('click', function() {
+        $('#tweetfeed').on('click', '.user', function() {
           $(this).css({'color': 'black'});
           var user = $(this).closest(".tweet").data("user");
 
