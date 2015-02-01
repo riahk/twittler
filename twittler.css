@@ -2,22 +2,62 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
-h1 {
-    text-align:  center;
+.line {
+  background: black;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+}
+
+#top {
+  width: 100%;
+  height: 40px;
+  background: rgb(71, 82, 139);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: inline;
+  z-index: 1;
+}
+
+#top p {
+  font-size: 10px;
+  color: silver;
+  position: relative;
+  top: 3px;
+  display: inline;
+}
+
+
+#home {
+  cursor: pointer;
+  display: inline;
+  position: relative;
+  top: 2px;
+  left: 2px;
+  color:  white;
 }
 
 #tweetfeed {
+  position: relative;
+  top: 50px;
   width: 500px;
-  background: grey;
+  background: rgb(71, 82, 139);
   padding: 20px;
   border-radius: 20px;
   margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 #addtweet {
+  position: relative;
   margin: 5px auto;
-  background: grey;
+  background: rgb(71, 82, 139);
   padding: 20px;
+  top: 50px;
   border-radius: 20px;
   width: 500px;
 }
@@ -30,10 +70,11 @@ h1 {
 
 #tweetsubmit {
     color:  white;
-    background: red;
+    background: rgb(97, 95, 121);
     padding:  10px;
-    border:  1px solid white;
+    border: 1px solid white;
     width: 490px;
+    border-radius: 30px;
     position: relative;
     left: 2px;
 }
@@ -52,12 +93,13 @@ h1 {
 }
 
 .user {
-    color: red;
+    color: rgb(92, 32, 87);
     margin: 0;
+    cursor: pointer;
 }
 
 .message {
-  color: blue;
+  color: rgb(11, 11, 11);
   margin:  0;
   position:  relative;
   margin-left: 20px;
