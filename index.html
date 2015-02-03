@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="jquery.timeago.js"></script>
     <link rel="stylesheet" type="text/css" href="twittler.css">
   </head>
   <body>
@@ -44,7 +45,7 @@
           //add the tweet to the doc
           $tweet.append('<h3 class="user">@' + tweet.user + ': </h3><br>'); 
           $tweet.append('<p class="message">' +  tweet.message + '</p><br>');
-          $tweet.append('<p class="timestamp">Tweeted On: ' + tweet.created_at + '</h4>');
+          $tweet.append('<p class="timestamp">' + jQuery.timeago(tweet.created_at) + '</h4>');
           
           if(prepend) {
             $tweet.prependTo($feed);
@@ -73,13 +74,15 @@
           while(index >= 0) {
             var tweet = streams.home[index];
 
-            if(tweet.user == user) {
+            if(tweet.user === user) {
               newTweet(tweet);
             }
 
             index -= 1;
           }
         });
+
+        //TODO: get timeago lib
 
         //refresh the tweets when the home button is clicked
         $('#home').on('click', function() {
